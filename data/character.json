@@ -1,7 +1,30 @@
 {
-  "name": "bob",
-  "class": "ninja",
-  "strength": 4,
-  "intelligence": 3,
-  "speed": 10
+  "name": "hi",
+  "class": "wizard",
+  "strength": 2,
+  "intelligence": 10,
+  "speed": 3,
+  "hp": 50,
+  "inventory": [
+    "mystery meat",
+    "mystery meat",
+    "mystery meat",
+    "mystery meat",
+    "mystery meat",
+    "mystery meat",
+    "mystery meat",
+    "mystery meat",
+    "mystery meat",
+    "mystery meat",
+    "mystery meat",
+    "mystery meat",
+    "mystery meat",
+    "mystery meat",
+    "mystery meat"
+  ],
+  "spells": [
+    "Fireball",
+    "MindBlast"
+  ],
+  "money": 5
 }

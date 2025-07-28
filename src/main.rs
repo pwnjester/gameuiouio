@@ -61,10 +61,16 @@
 mod character;
 mod rooms;
 mod dialog;
+mod items;
+mod spells;
+mod npcs;
 
 use crate::dialog::*;
+use crate::items::*;
+use crate::spells::*;
 use crate::character::create;
 use crate::rooms::*;
+use crate::npcs::*;
 
 fn main() {
     character::master::main();

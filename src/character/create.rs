@@ -1,14 +1,20 @@
 use std::io::{self, Write};
-use serde::Serialize;
+use serde::{Serialize, Deserialize};
 use serde_json::json;
 
-#[derive(Serialize)]
+use crate::spells::Spell;
+
+#[derive(Serialize, Deserialize)]
 pub struct Character {
-    name: String,
-    class: String,
-    strength: u32,
-    intelligence: u32,
-    speed: u32,
+    pub name: String,
+    pub class: String,
+    pub strength: u32,
+    pub intelligence: u32,
+    pub speed: u32,
+    pub hp: u32,
+    pub inventory: Vec<String>,
+    pub spells: Vec<Spell>,
+    pub money: u32,
 }
 
 fn prompt(msg: &str) -> String {
@@ -19,25 +25,21 @@ fn prompt(msg: &str) -> String {
     input.trim().to_string()
 }
 
-fn prompt_num(msg: &str) -> u32 {
-    prompt(msg).parse().unwrap_or(0)
-}
-
 fn get_class_stats(class: &str) -> (u32, u32, u32) {
     match class.to_lowercase().as_str() {
         "fighter" => (10, 2, 4),
         "wizard" => (2, 10, 3),
         "ninja" => (4, 3, 10),
         "idiot" => (0, 0, 0),
-        _ => (1, 1, 1), // default trash
+        _ => (1, 1, 1),
     }
 }
 
 pub fn main() {
     let name = prompt("Enter your name: ");
     let class = prompt("Choose your class (fighter, wizard, ninja): ");
-
     let (strength, intelligence, speed) = get_class_stats(&class);
+    let spells = Spell::starter_spells_for(&class);
 
     let chara = Character {
         name,
@@ -45,6 +47,10 @@ pub fn main() {
         strength,
         intelligence,
         speed,
+        hp: 50,
+        inventory: vec![],
+        spells,
+        money: 50,
     };
 
     let json = serde_json::to_string_pretty(&chara).unwrap();
