@@ -3,13 +3,12 @@ use serde::Serialize;
 use serde_json::json;
 
 #[derive(Serialize)]
-struct Character {
+pub struct Character {
     name: String,
     class: String,
-    str_: u32,
-    int_: u32,
-    dex: u32,
-    num: u32,
+    strength: u32,
+    intelligence: u32,
+    speed: u32,
 }
 
 fn prompt(msg: &str) -> String {
@@ -37,17 +36,15 @@ fn get_class_stats(class: &str) -> (u32, u32, u32) {
 pub fn main() {
     let name = prompt("Enter your name: ");
     let class = prompt("Choose your class (fighter, wizard, ninja): ");
-    let num = prompt_num("Enter your number: ");
 
-    let (str_, int_, dex) = get_class_stats(&class);
+    let (strength, intelligence, speed) = get_class_stats(&class);
 
     let chara = Character {
         name,
         class,
-        str_,
-        int_,
-        dex,
-        num,
+        strength,
+        intelligence,
+        speed,
     };
 
     let json = serde_json::to_string_pretty(&chara).unwrap();

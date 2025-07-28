@@ -1,4 +1,7 @@
 {
   "name": "Henry",
-  "num": 12
+  "class": "ninja",
+  "strength": 4,
+  "intelligence": 3,
+  "speed": 10
 }
