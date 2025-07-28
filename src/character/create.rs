@@ -15,6 +15,26 @@ pub struct Character {
     pub inventory: Vec<String>,
     pub spells: Vec<Spell>,
     pub money: u32,
+    pub relationships: Vec<NPCRelationship>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct NPCRelationship {
+    pub name: String,
+    pub friendliness: i32,
+}
+
+impl Character {
+    pub fn get_or_create_relationship(&mut self, name: &str) -> &mut NPCRelationship {
+        if let Some(i) = self.relationships.iter().position(|r| r.name == name) {
+            return &mut self.relationships[i];
+        }
+        self.relationships.push(NPCRelationship {
+            name: name.to_string(),
+            friendliness: 10,
+        });
+        self.relationships.last_mut().unwrap()
+    }
 }
 
 fn prompt(msg: &str) -> String {
@@ -51,6 +71,7 @@ pub fn main() {
         inventory: vec![],
         spells,
         money: 50,
+        relationships: vec![],
     };
 
     let json = serde_json::to_string_pretty(&chara).unwrap();
