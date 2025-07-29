@@ -1,0 +1,8 @@
+{
+  "name": "Robert",
+  "hp": 30,
+  "atk": 7,
+  "def": 3,
+  "dialog": ["Robert glares at you.", "Robert adjusts his poncho."],
+  "effects": ["burn"]
+}

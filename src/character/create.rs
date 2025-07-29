@@ -16,6 +16,7 @@ pub struct Character {
     pub spells: Vec<Spell>,
     pub money: u32,
     pub relationships: Vec<NPCRelationship>,
+    pub effects: Vec<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -72,6 +73,7 @@ pub fn main() {
         spells,
         money: 50,
         relationships: vec![],
+        effects: vec![],
     };
 
     let json = serde_json::to_string_pretty(&chara).unwrap();

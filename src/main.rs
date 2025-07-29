@@ -21,7 +21,7 @@
 // then if the room file detects a certain important choice, itll change to a diff path which will call a different room
 //
 /// COMBAT
-// i will implement the dialog system soon, but first, we need to come up with a combat system idea
+// we need to come up with a combat system idea
 // obviously, engaging in combat will have a negative effect on your relationship with an npc
 // i think we could do a few things:
 // 1. we could have something setup where there are spells and items that do things and character.json will track what
@@ -32,13 +32,15 @@
 //    i probably won't do this one unless i figure out a way to make it interesting
 // lets, right now assume im going with number 1.
 // the structure would be, theres a folder for combat in which there will be items and spells
-// obviously there can be non-combat related items in there too, its just for simplicity
-// what i need to decide is whether i have one struct/json of all the items (and a separate one for all the spells)
-// or if i should have a file for each. orrrrr, maybe just one mod.rs or smth
+// i just put items and spells in the src dir, i dont thing it really matters
 // either way im going to need to implement an effects file that stores a bunch of effects that the items and spells can steal from
 // in that file, i can be forced to implement turn skipping and damage over multiple rounds etc
 // first though, create a combat loop, because right now i dont have that. i need a turn based combat system
 // and i need it to be pretty fun and interesting, which is reall tough when it comes to turn based
+// i can have a separate thing for one-time effects and reoccuring effects, that way the combat loop only
+// has to check the reoccuring effects list to see if anything is still going
+// store npc health in the corresponding json? or just in some master json, because technically all that im gonna store
+// is their names and health
 //
 /// NPCs
 // for the non player characters now, i need a system for each one and their dialog/combat
@@ -64,6 +66,8 @@ mod dialog;
 mod items;
 mod spells;
 mod npcs;
+#[macro_use]
+mod combat;
 
 use crate::dialog::*;
 use crate::items::*;
@@ -71,6 +75,7 @@ use crate::spells::*;
 use crate::character::create;
 use crate::rooms::*;
 use crate::npcs::*;
+use crate::combat::{effects, combat_loop};
 
 fn main() {
     character::master::main();

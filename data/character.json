@@ -11,10 +11,6 @@
     "MindBlast"
   ],
   "money": 50,
-  "relationships": [
-    {
-      "name": "robert",
-      "friendliness": 5
-    }
-  ]
+  "relationships": [],
+  "effects": []
 }
